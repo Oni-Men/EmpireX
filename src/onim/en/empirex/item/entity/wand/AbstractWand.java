@@ -10,7 +10,6 @@ import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemFlag;
@@ -19,12 +18,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import onim.en.empirex.item.CustomItem;
 import onim.en.empirex.item.interfaces.Droppable;
-import onim.en.empirex.item.interfaces.Interactable;
+import onim.en.empirex.item.interfaces.LeftClickable;
 import onim.en.empirex.magic.Wand;
 import onim.en.empirex.magic.WandManager;
 import onim.en.empirex.magic.spell.Spell;
 
-public abstract class AbstractWand extends CustomItem implements Interactable, Droppable {
+public abstract class AbstractWand extends CustomItem implements LeftClickable, Droppable {
 
   public static final String MAGIC_WAND_ID = "magic_wand";
 
@@ -49,25 +48,16 @@ public abstract class AbstractWand extends CustomItem implements Interactable, D
   }
 
   @Override
-  public boolean onInteract(PlayerInteractEvent event) {
+  public void onLeftClick(PlayerInteractEvent event) {
     Player player = event.getPlayer();
-    Action action = event.getAction();
-
-    if (action != Action.LEFT_CLICK_AIR && action != Action.LEFT_CLICK_BLOCK) {
-      return false;
-    }
-
     event.setCancelled(true);
 
     if (player.getAttackCooldown() != 1F) {
-      return false;
+      return;
     }
-
 
     Wand wand = WandManager.getWand(event.getItem());
     wand.castSpell(player);
-
-    return true;
   }
 
   public abstract Material getMaterial();
