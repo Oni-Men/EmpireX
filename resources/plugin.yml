@@ -1,0 +1,21 @@
+name: EmpireX
+main: onim.en.empirex.EmpireX
+version: 1.0.0
+api-version: 1.17
+api: ["1.17"]
+commands:
+  items:
+    description: ""
+    permission: onim.en.staff.items
+  trashbox:
+    description: ""
+    permission: onim.en.player.trashbox
+  editspell:
+    description: ""
+    permission: onim.en.player.editspell
+  debug:
+    description: ""
+    permission: onim.en.staff.debug
+  info:
+    description: "print player's info"
+    permission: onim.en.player.info
