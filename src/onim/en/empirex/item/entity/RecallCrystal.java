@@ -35,7 +35,8 @@ public class RecallCrystal extends CustomItem implements Heldable, MoveDetectabl
   private HashMap<Player, BukkitTask> tasks;
 
   public RecallCrystal() {
-    super("recall_crystal", "Recall Crystal", Arrays.asList("Back to specified location"));
+    super("recall_crystal", "Recall Crystal", Arrays
+      .asList("アイテムを持って5秒間スニークすることでリコール地点を設定できます", "アイテムを以って10秒間動かずにいることでリコールできます"));
     tasks = Maps.newHashMap();
   }
 
@@ -52,6 +53,8 @@ public class RecallCrystal extends CustomItem implements Heldable, MoveDetectabl
     if (event.getAction() == HeldAction.START) {
 
       if (player.isSneaking()) {
+        this.startUpdate(player, event.getNewItemStack(), player.getLocation());
+      } else {
         Location location = getLocationRecall(event.getNewItemStack());
 
         if (location == null) {
@@ -59,8 +62,6 @@ public class RecallCrystal extends CustomItem implements Heldable, MoveDetectabl
         }
 
         this.startRecall(player, event.getNewItemStack(), location);
-      } else {
-        this.startUpdate(player, event.getNewItemStack(), player.getLocation());
       }
     }
 
