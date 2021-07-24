@@ -11,6 +11,7 @@ import onim.en.empirex.base.FactoryBase;
 import onim.en.empirex.item.entity.HunterCrossbow;
 import onim.en.empirex.item.entity.Katana;
 import onim.en.empirex.item.entity.RapidFire;
+import onim.en.empirex.item.entity.RecallCrystal;
 import onim.en.empirex.item.entity.SummonShield;
 import onim.en.empirex.item.entity.wand.BoneWand;
 import onim.en.empirex.item.entity.wand.BronzeWand;
@@ -43,6 +44,7 @@ public class ItemFactory extends FactoryBase<CustomItem> {
     set(new RapidFire());
     set(new SummonShield());
     set(new Katana());
+    set(new RecallCrystal());
   }
 
   @Override
