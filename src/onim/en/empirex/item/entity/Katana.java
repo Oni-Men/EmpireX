@@ -12,16 +12,15 @@ import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import onim.en.empirex.EmpireX;
 import onim.en.empirex.item.CustomItem;
-import onim.en.empirex.item.interfaces.Interactable;
+import onim.en.empirex.item.interfaces.LeftClickable;
 
-public class Katana extends CustomItem implements Interactable {
+public class Katana extends CustomItem implements LeftClickable {
 
   public Katana() {
     super("katana", "Katana", Arrays.asList("Tuyoi ken"));
@@ -44,20 +43,16 @@ public class Katana extends CustomItem implements Interactable {
   }
 
   @Override
-  public boolean onInteract(PlayerInteractEvent event) {
-    if (event.getAction() != Action.LEFT_CLICK_AIR && event.getAction() != Action.LEFT_CLICK_BLOCK) {
-      return false;
-    }
-
+  public void onLeftClick(PlayerInteractEvent event) {
     Player player = event.getPlayer();
     ItemStack stack = player.getInventory().getItemInMainHand();
 
     if (!this.isValidItem(stack))
-      return false;
+      return;
 
     if (player.getAttackCooldown() != 1.0f)
-      return false;
-
+      return;
+      
     World world = player.getWorld();
     Location location = player.getLocation().add(0, 0.5, 0);
 
@@ -76,7 +71,6 @@ public class Katana extends CustomItem implements Interactable {
       }, i);
     });
 
-    return true;
   }
 
 }

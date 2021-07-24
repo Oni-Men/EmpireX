@@ -2,8 +2,7 @@ package onim.en.empirex.item.interfaces;
 
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public interface Interactable {
+public interface RightClickable {
 
-  public boolean onInteract(PlayerInteractEvent event);
-
+  public void onRightClick(PlayerInteractEvent event);
 }
