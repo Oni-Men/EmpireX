@@ -13,7 +13,7 @@ public class CutLogAutomatically {
   }
 
   public static void cut(Block block, boolean first) {
-    if (!isLog(block) && (!isLeaves(block) && first)) {
+    if (!isLog(block) && !(isLeaves(block) && !first)) {
       return;
     }
 
@@ -26,6 +26,7 @@ public class CutLogAutomatically {
         cut(up.getRelative(BlockFace.EAST), false);
         cut(up.getRelative(BlockFace.WEST), false);
         cut(up.getRelative(BlockFace.SOUTH), false);
+        cut(up.getRelative(BlockFace.DOWN), false);
       }, 4L);
     }
   }
