@@ -1,6 +1,6 @@
 name: EmpireX
 main: onim.en.empirex.EmpireX
-version: 1.0.0
+version: ${project.version}
 api-version: 1.17
 api: ["1.17"]
 commands:
