@@ -82,7 +82,10 @@ public class ItemListener implements Listener {
     if (!(shooter instanceof Player))
       return;
 
-    ItemStack stack = ((Player) shooter).getActiveItem();
+    Player player = (Player) shooter;
+    PlayerInventory inventory = player.getInventory();
+
+    ItemStack stack = inventory.getItemInMainHand();
     CustomItem customItem = EmpireX.itemFactory.toCustomItem(stack);
 
     if (customItem instanceof Shootable) {

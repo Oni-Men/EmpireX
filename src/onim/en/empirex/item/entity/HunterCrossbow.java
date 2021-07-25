@@ -70,7 +70,7 @@ public class HunterCrossbow extends CustomItem implements Shootable {
     Vector velocity = shooter.getLocation().getDirection();
     arrowEntity.setVelocity(velocity.multiply(arrowEntity.getVelocity().length() * 3D));
     arrowEntity.setGravity(false);
-    arrowEntity.setKnockbackStrength(5);
+    arrowEntity.setKnockbackStrength(2);
     arrowEntity.setPierceLevel(5);
     return true;
   }
