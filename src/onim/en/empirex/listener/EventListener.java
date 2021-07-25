@@ -22,13 +22,10 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.projectiles.ProjectileSource;
 
 import onim.en.empirex.gui.WindowRegistry;
 import onim.en.empirex.item.ItemUtil;
-import onim.en.empirex.item.entity.RapidFire;
 import onim.en.empirex.magic.spell.ball.SpellAbstractBall;
 import onim.en.empirex.util.EntityUtil;
 
@@ -93,14 +90,11 @@ public class EventListener implements Listener {
     }
 
     Entity hitEntity = event.getHitEntity();
-    PersistentDataContainer data = projectile.getPersistentDataContainer();
 
-    if (hitEntity != null && data.has(RapidFire.key_rapid_fire_arrow, PersistentDataType.BYTE)) {
-
-      if (hitEntity instanceof LivingEntity) {
+    if (hitEntity instanceof LivingEntity) {
+      if (EntityUtil.isEntityNoImmunity(projectile)) {
         ((LivingEntity) hitEntity).setNoDamageTicks(0);
       }
-
     }
   }
 

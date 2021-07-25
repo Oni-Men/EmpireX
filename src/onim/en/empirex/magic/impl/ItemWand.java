@@ -17,6 +17,7 @@ import org.bukkit.persistence.PersistentDataType;
 import onim.en.empirex.EmpireX;
 import onim.en.empirex.magic.Wand;
 import onim.en.empirex.magic.spell.Spell;
+import onim.en.empirex.util.KeyFactory;
 
 public class ItemWand implements Wand {
 
@@ -26,17 +27,12 @@ public class ItemWand implements Wand {
 
     private final String key;
 
-    private NamespacedKey namespacedKey = null;
-
     WandDataKey(String key) {
       this.key = key;
     }
 
     public NamespacedKey key() {
-      if (namespacedKey == null) {
-        namespacedKey = new NamespacedKey(EmpireX.instance, key);
-      }
-      return namespacedKey;
+      return KeyFactory.get(key);
     }
 
   }

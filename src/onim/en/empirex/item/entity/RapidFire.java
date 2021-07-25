@@ -22,10 +22,10 @@ import onim.en.empirex.EmpireX;
 import onim.en.empirex.item.CustomItem;
 import onim.en.empirex.item.ItemUtil;
 import onim.en.empirex.item.interfaces.Shootable;
+import onim.en.empirex.util.EntityUtil;
+import onim.en.empirex.util.KeyFactory;
 
 public class RapidFire extends CustomItem implements Shootable {
-
-  public static final NamespacedKey key_rapid_fire_arrow = new NamespacedKey(EmpireX.instance, "rapid_fire_arrow.dummy");
 
   public RapidFire() {
     super("rapid_fire", "Rapid Fire", Arrays.asList("Fully charged arrows become Rapid Fire"));
@@ -51,6 +51,9 @@ public class RapidFire extends CustomItem implements Shootable {
       Preconditions.checkState(arrowEntity.getShooter() instanceof Player);
       Preconditions.checkState(!arrowEntity.isShotFromCrossbow());
       Preconditions.checkState(arrowEntity.isCritical());
+
+      NamespacedKey key_rapid_fire_arrow = KeyFactory.get("rapid_fire_arrow");
+
       Preconditions
         .checkState(!arrowEntity.getPersistentDataContainer().has(key_rapid_fire_arrow, PersistentDataType.BYTE));
 
@@ -80,6 +83,8 @@ public class RapidFire extends CustomItem implements Shootable {
           Arrow arrow = player.launchProjectile(Arrow.class);
           arrow.setCritical(true);
           arrow.getPersistentDataContainer().set(key_rapid_fire_arrow, PersistentDataType.BYTE, (byte) count);
+
+          EntityUtil.makeEntityNoImmunity(arrow);
 
           player.playSound(player.getLocation(), Sound.ENTITY_ARROW_SHOOT, 1f, 1f);
           count++;

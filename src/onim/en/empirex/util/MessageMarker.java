@@ -14,10 +14,9 @@ import onim.en.empirex.EmpireX;
 
 public class MessageMarker {
 
-  private static final NamespacedKey key = new NamespacedKey(EmpireX.instance, "message_marker");
-
   public static void removeAllMarkers() {
-    
+    NamespacedKey key = KeyFactory.get("message_marker");
+
     for (World world : Bukkit.getWorlds()) {
       Collection<ArmorStand> armorStands = world.getEntitiesByClass(ArmorStand.class);
 
@@ -34,6 +33,8 @@ public class MessageMarker {
   }
 
   public static void spawn(Location location, String msg) {
+    NamespacedKey key = KeyFactory.get("message_marker");
+    
     World world = location.getWorld();
     ArmorStand spawn = world.spawn(location.add(0, 1, 0), ArmorStand.class, stand -> {
       stand.setInvisible(true);

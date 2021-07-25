@@ -5,12 +5,10 @@ import org.bukkit.entity.Entity;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import onim.en.empirex.EmpireX;
-
 public class EntityUtil {
 
   private static NamespacedKey getKeyExplodable() {
-    return new NamespacedKey(EmpireX.instance, "explodable");
+    return KeyFactory.get("explodable");
   }
 
   public static void makeEntityExplodable(Entity entity, float power) {
@@ -32,5 +30,15 @@ public class EntityUtil {
     }
 
     return 0F;
+  }
+
+  public static void makeEntityNoImmunity(Entity entity) {
+    PersistentDataContainer data = entity.getPersistentDataContainer();
+    data.set(KeyFactory.get("no_immunity"), PersistentDataType.BYTE, (byte) 1);
+  }
+
+  public static boolean isEntityNoImmunity(Entity entity) {
+    PersistentDataContainer data = entity.getPersistentDataContainer();
+    return data.has(KeyFactory.get("no_immunity"), PersistentDataType.BYTE);
   }
 }

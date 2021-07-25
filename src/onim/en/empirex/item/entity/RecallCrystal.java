@@ -29,14 +29,19 @@ import onim.en.empirex.item.CustomItem;
 import onim.en.empirex.item.interfaces.Heldable;
 import onim.en.empirex.item.interfaces.MoveDetectable;
 import onim.en.empirex.item.interfaces.ToggleSneakDetectable;
+import onim.en.empirex.util.KeyFactory;
 
 public class RecallCrystal extends CustomItem implements Heldable, MoveDetectable, ToggleSneakDetectable {
+
+  private static final String[] description = new String[] {
+      "Keep holding item for 5 seconds to update position",
+      "Keep holding item for 10 seconds to recall."
+  };
 
   private HashMap<Player, BukkitTask> tasks;
 
   public RecallCrystal() {
-    super("recall_crystal", "Recall Crystal", Arrays
-      .asList("アイテムを持って5秒間スニークすることでリコール地点を設定できます", "アイテムを以って10秒間動かずにいることでリコールできます"));
+    super("recall_crystal", "Recall Crystal", Arrays.asList(description));
     tasks = Maps.newHashMap();
   }
 
@@ -131,7 +136,7 @@ public class RecallCrystal extends CustomItem implements Heldable, MoveDetectabl
     }
 
     PersistentDataContainer data = stack.getItemMeta().getPersistentDataContainer();
-    NamespacedKey key = new NamespacedKey(EmpireX.instance, "recall_location");
+    NamespacedKey key = KeyFactory.get("recall_location");
 
     if (data.has(key, PersistentDataType.STRING)) {
       return parseLocationString(data.get(key, PersistentDataType.STRING));
@@ -148,7 +153,7 @@ public class RecallCrystal extends CustomItem implements Heldable, MoveDetectabl
     ItemMeta meta = stack.getItemMeta();
     PersistentDataContainer data = meta.getPersistentDataContainer();
 
-    NamespacedKey key = new NamespacedKey(EmpireX.instance, "recall_location");
+    NamespacedKey key = KeyFactory.get("recall_location");
     data.set(key, PersistentDataType.STRING, toLocationString(location));
 
     stack.setItemMeta(meta);
