@@ -60,18 +60,7 @@ public class RecallCrystal extends CustomItem implements Heldable, MoveDetectabl
     Player player = event.getPlayer();
 
     if (event.getAction() == HeldAction.START) {
-
-      if (player.isSneaking()) {
-        this.startUpdate(player, event.getNewItemStack(), player.getLocation());
-      } else {
-        Location location = getLocationRecall(event.getNewItemStack());
-
-        if (location == null) {
-          sendActionBar(player, ChatColor.RED + "リコール地点がありません");
-        }
-
-        this.startRecall(player, event.getNewItemStack(), location);
-      }
+      this.start(player, event.getNewItemStack());
     }
 
     if (event.getAction() == HeldAction.STOP) {
@@ -89,6 +78,20 @@ public class RecallCrystal extends CustomItem implements Heldable, MoveDetectabl
   @Override
   public void onToggleSneak(PlayerToggleSneakEvent event) {
     this.cancelRecall(event.getPlayer(), true);
+  }
+
+  private void start(Player player, ItemStack stack) {
+    if (player.isSneaking()) {
+      this.startUpdate(player, stack, player.getLocation());
+    } else {
+      Location location = getLocationRecall(stack);
+
+      if (location == null) {
+        sendActionBar(player, ChatColor.RED + "リコール地点がありません");
+      } else {
+        this.startRecall(player, stack, location);
+      }
+    }
   }
 
   private void startRecall(Player player, ItemStack stack, Location location) {
