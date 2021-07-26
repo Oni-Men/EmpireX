@@ -8,7 +8,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.ArmorStand.LockType;
 import org.bukkit.entity.Player;
@@ -29,15 +28,13 @@ public class SummonShield extends CustomItem implements RightClickable {
   }
 
   @Override
-  public ItemStack getItemStack() {
-    ItemStack stack = new ItemStack(Material.SHIELD);
-    stack.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
-    return stack;
+  public Material getMaterial() {
+    return Material.SHIELD;
   }
 
   @Override
-  public int getCooltime() {
-    return 10;
+  public boolean isGlowing() {
+    return true;
   }
 
   @Override

@@ -46,9 +46,13 @@ public class RecallCrystal extends CustomItem implements Heldable, MoveDetectabl
   }
 
   @Override
-  public ItemStack getItemStack() {
-    ItemStack stack = new ItemStack(Material.AMETHYST_SHARD);
-    return stack;
+  public Material getMaterial() {
+    return Material.AMETHYST_SHARD;
+  }
+
+  @Override
+  public boolean isGlowing() {
+    return true;
   }
 
   @Override

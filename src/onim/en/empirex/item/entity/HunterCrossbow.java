@@ -3,14 +3,12 @@ package onim.en.empirex.item.entity;
 import java.util.Arrays;
 
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.CrossbowMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
 import com.google.common.base.Preconditions;
@@ -27,14 +25,13 @@ public class HunterCrossbow extends CustomItem implements Shootable {
   }
 
   @Override
-  public ItemStack getItemStack() {
-    ItemStack stack = new ItemStack(Material.CROSSBOW);
-    ItemMeta meta = stack.getItemMeta();
-    meta.addEnchant(Enchantment.DURABILITY, 10, true);
-    meta.addEnchant(Enchantment.QUICK_CHARGE, 3, true);
-    meta.setUnbreakable(true);
-    stack.setItemMeta(meta);
-    return stack;
+  public Material getMaterial() {
+    return Material.CROSSBOW;
+  }
+
+  @Override
+  public boolean isGlowing() {
+    return true;
   }
 
   @Override

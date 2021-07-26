@@ -9,12 +9,10 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.World;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import onim.en.empirex.EmpireX;
 import onim.en.empirex.item.CustomItem;
@@ -27,19 +25,13 @@ public class Katana extends CustomItem implements LeftClickable {
   }
 
   @Override
-  public ItemStack getItemStack() {
-    ItemStack stack = new ItemStack(Material.IRON_SWORD);
-    stack.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
-    ItemMeta meta = stack.getItemMeta();
-    meta.setUnbreakable(true);
-    stack.setItemMeta(meta);
-
-    return stack;
+  public Material getMaterial() {
+    return Material.IRON_SWORD;
   }
 
   @Override
-  public int getCooltime() {
-    return 0;
+  public boolean isGlowing() {
+    return true;
   }
 
   @Override

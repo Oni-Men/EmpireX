@@ -6,13 +6,11 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -32,13 +30,13 @@ public class RapidFire extends CustomItem implements Shootable {
   }
 
   @Override
-  public ItemStack getItemStack() {
-    ItemStack stack = new ItemStack(Material.BOW);
-    ItemMeta meta = stack.getItemMeta();
-    meta.addEnchant(Enchantment.MULTISHOT, 5, true);
-    meta.setUnbreakable(true);
-    stack.setItemMeta(meta);
-    return stack;
+  public Material getMaterial() {
+    return Material.BOW;
+  }
+
+  @Override
+  public boolean isGlowing() {
+    return true;
   }
 
   @Override

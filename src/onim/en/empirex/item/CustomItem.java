@@ -6,7 +6,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -18,12 +21,11 @@ import onim.en.empirex.base.Identifiable;
 
 public abstract class CustomItem implements Identifiable {
 
-  public static final List<ItemTag> UNIQUE_UNDROPPABLE =
-      Arrays.asList(ItemTag.UNIQUE, ItemTag.UNDROPPABLE);
+  public static final List<ItemTag> UNIQUE_UNDROPPABLE = Arrays.asList(ItemTag.UNIQUE, ItemTag.UNDROPPABLE);
 
+  public final String id;
   public final String name;
   public final List<Component> description;
-  public final String id;
 
   public CustomItem(String id, String name) {
     this(id, name, Collections.emptyList());
@@ -39,6 +41,10 @@ public abstract class CustomItem implements Identifiable {
     }
   }
 
+  public String id() {
+    return this.id;
+  }
+
   public String getName() {
     return this.name;
   };
@@ -47,18 +53,20 @@ public abstract class CustomItem implements Identifiable {
     return this.description;
   };
 
-  public String id() {
-    return this.id;
-  }
+  public abstract Material getMaterial();
 
-  public abstract ItemStack getItemStack();
+  public abstract boolean isGlowing();
 
   public List<ItemTag> getTags() {
     return UNIQUE_UNDROPPABLE;
   }
 
-  public int getCooltime() {
-    return 0;
+  public ItemMeta modifyMeta(ItemMeta meta) {
+    return meta;
+  }
+
+  public ItemStack modifyItemStack(ItemStack stack) {
+    return stack;
   }
 
   public final boolean isValidItem(ItemStack stack) {
@@ -69,10 +77,16 @@ public abstract class CustomItem implements Identifiable {
     return pluginItemId.contentEquals(this.id());
   }
 
-  public final ItemStack getFormattedItem() {
-    ItemStack stack = this.getItemStack();
-    ItemMeta meta = stack.getItemMeta();
+  public final ItemStack createItem() {
+    ItemStack stack = new ItemStack(this.getMaterial());
 
+    if (this.isGlowing()) {
+      stack.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
+    }
+
+    ItemMeta meta = stack.getItemMeta();
+    meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+    meta.setUnbreakable(true);
     meta.displayName(Component.text(getName()));
 
     List<Component> lore = meta.lore();
@@ -90,10 +104,11 @@ public abstract class CustomItem implements Identifiable {
 
     lore.add(Component.empty());
     meta.lore(lore);
-    stack.setItemMeta(meta);
+
+    stack.setItemMeta(modifyMeta(meta));
 
     ItemUtil.setPluginItemId(stack, id());
-    return stack;
+    return modifyItemStack(stack);
   }
 
   public boolean isCooldown(ItemStack stack) {
@@ -106,10 +121,10 @@ public abstract class CustomItem implements Identifiable {
     return System.currentTimeMillis() > cooldown;
   }
 
-  public void setCooldown(ItemStack stack) {
+  public void setCooldown(ItemStack stack, int cooltime) {
     ItemMeta meta = stack.getItemMeta();
     PersistentDataContainer data = meta.getPersistentDataContainer();
-    long cooldown = System.currentTimeMillis() + this.getCooltime() * 1000;
+    long cooldown = System.currentTimeMillis() + cooltime * 1000;
     data.set(new NamespacedKey(EmpireX.instance, "cooldown"), PersistentDataType.LONG, cooldown);
     stack.setItemMeta(meta);
   }

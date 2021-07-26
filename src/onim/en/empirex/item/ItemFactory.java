@@ -32,7 +32,7 @@ public class ItemFactory extends FactoryBase<CustomItem> {
   }
 
   public List<ItemStack> toStackList() {
-    return all().stream().map(i -> i.getFormattedItem()).collect(Collectors.toList());
+    return all().stream().map(i -> i.createItem()).collect(Collectors.toList());
   }
 
   @Override

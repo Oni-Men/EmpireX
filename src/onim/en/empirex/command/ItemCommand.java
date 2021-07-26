@@ -29,7 +29,7 @@ public class ItemCommand implements CommandExecutor {
       if (itemModel == null)
         return false;
 
-      player.getInventory().addItem(itemModel.getFormattedItem());
+      player.getInventory().addItem(itemModel.createItem());
     }
 
     return true;
