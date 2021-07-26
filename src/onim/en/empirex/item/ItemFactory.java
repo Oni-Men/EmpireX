@@ -10,6 +10,7 @@ import com.google.common.base.Strings;
 import onim.en.empirex.base.FactoryBase;
 import onim.en.empirex.item.entity.HookShot;
 import onim.en.empirex.item.entity.HunterCrossbow;
+import onim.en.empirex.item.entity.HyperKineticPositionReverser;
 import onim.en.empirex.item.entity.Katana;
 import onim.en.empirex.item.entity.RapidFire;
 import onim.en.empirex.item.entity.RecallCrystal;
@@ -47,6 +48,7 @@ public class ItemFactory extends FactoryBase<CustomItem> {
     set(new SummonShield());
     set(new Katana());
     set(new RecallCrystal());
+    set(new HyperKineticPositionReverser());
   }
 
   @Override
