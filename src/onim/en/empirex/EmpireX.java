@@ -1,5 +1,6 @@
 package onim.en.empirex;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,7 +17,9 @@ import onim.en.empirex.listener.EventListener;
 import onim.en.empirex.listener.PlayerListener;
 import onim.en.empirex.magic.spell.SpellFactory;
 import onim.en.empirex.player.CivilianFactory;
+import onim.en.empirex.player.routine.ForceRegenerationWorker;
 import onim.en.empirex.util.MessageMarker;
+import onim.en.empirex.util.Ticks;
 
 public class EmpireX extends JavaPlugin {
 
@@ -41,6 +44,8 @@ public class EmpireX extends JavaPlugin {
     this.getCommand("info").setExecutor(new InfoCommand());
 
     civilianFactory.loadOnlines();
+
+    this.startWorkers();
   }
 
   @Override
@@ -62,5 +67,10 @@ public class EmpireX extends JavaPlugin {
     pluginManager.registerEvents(new ItemListener(), instance);
     pluginManager.registerEvents(new BlockListener(), instance);
     pluginManager.registerEvents(new CivilianListener(), instance);
+  }
+
+  private void startWorkers() {
+    Bukkit.getScheduler().runTaskTimer(this, new ForceRegenerationWorker(), 0, Ticks.sec(5));
+
   }
 }

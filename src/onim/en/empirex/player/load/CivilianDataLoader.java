@@ -15,6 +15,7 @@ public class CivilianDataLoader {
   private static final String key_profession = "civilian_profession";
   private static final String key_death_count = "civilian_deaths";
   private static final String key_kill_count = "civilian_kills";
+  private static final String key_force = "civilian_force";
 
 
   public static Civilian load(Player player) {
@@ -24,6 +25,7 @@ public class CivilianDataLoader {
 
     civilian.setLevel(data.getOrDefault(KeyFactory.get(key_level), PersistentDataType.INTEGER, 1));
     civilian.setExp(data.getOrDefault(KeyFactory.get(key_exp), PersistentDataType.INTEGER, 0));
+    civilian.setForce(data.getOrDefault(KeyFactory.get(key_force), PersistentDataType.INTEGER, 0));
 
     String typeStr = data.get(KeyFactory.get(key_profession), PersistentDataType.STRING);
     if (typeStr != null) {
@@ -44,6 +46,7 @@ public class CivilianDataLoader {
 
     data.set(KeyFactory.get(key_level), PersistentDataType.INTEGER, civilian.getLevel());
     data.set(KeyFactory.get(key_exp), PersistentDataType.INTEGER, civilian.getExp());
+    data.set(KeyFactory.get(key_force), PersistentDataType.INTEGER, civilian.getForce());
     data.set(KeyFactory.get(key_profession), PersistentDataType.STRING, civilian.getProfessionType().name());
     data.set(KeyFactory.get(key_death_count), PersistentDataType.INTEGER, civilian.getDeathCount());
     data.set(KeyFactory.get(key_kill_count), PersistentDataType.INTEGER, civilian.getKillStreak());
