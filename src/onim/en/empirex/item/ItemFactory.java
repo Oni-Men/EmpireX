@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import com.google.common.base.Strings;
 
 import onim.en.empirex.base.FactoryBase;
+import onim.en.empirex.item.entity.HookShot;
 import onim.en.empirex.item.entity.HunterCrossbow;
 import onim.en.empirex.item.entity.Katana;
 import onim.en.empirex.item.entity.RapidFire;
@@ -37,6 +38,7 @@ public class ItemFactory extends FactoryBase<CustomItem> {
 
   @Override
   protected void init() {
+    set(new HookShot());
     set(new HunterCrossbow());
     set(new BronzeWand());
     set(new BoneWand());

@@ -13,7 +13,7 @@ public interface Wand {
 
   public void setActiveSpell(Spell spell);
 
-  public void castSpell(Player player);
+  public boolean castSpell(Player player);
 
   public void addSpell(Spell spell);
 

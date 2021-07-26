@@ -43,8 +43,8 @@ public class SpellFrozenBall extends SpellAbstractBall {
   }
 
   @Override
-  public BlockData getBlockData() {
-    return Bukkit.createBlockData(Material.ICE);
+  public Material getBallMaterial() {
+    return Material.QUARTZ;
   }
 
   @Override

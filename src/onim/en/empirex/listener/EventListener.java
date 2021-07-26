@@ -28,6 +28,7 @@ import onim.en.empirex.gui.WindowRegistry;
 import onim.en.empirex.item.ItemUtil;
 import onim.en.empirex.magic.spell.ball.SpellAbstractBall;
 import onim.en.empirex.util.EntityUtil;
+import onim.en.empirex.util.Memory;
 
 public class EventListener implements Listener {
 
@@ -61,7 +62,8 @@ public class EventListener implements Listener {
 
   @EventHandler
   public void onBlockChange(EntityChangeBlockEvent event) {
-    if (event.getEntity().hasMetadata(SpellAbstractBall.SPELL_BALL_KEY)) {
+    Memory memory = new Memory(event.getEntity());
+    if (memory.hasTag(SpellAbstractBall.SPELL_BALL_DUMMY)) {
       event.setCancelled(true);
     }
   }

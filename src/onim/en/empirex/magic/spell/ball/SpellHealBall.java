@@ -1,11 +1,9 @@
 package onim.en.empirex.magic.spell.ball;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.potion.PotionEffect;
@@ -47,8 +45,8 @@ public class SpellHealBall extends SpellAbstractBall {
   }
 
   @Override
-  public BlockData getBlockData() {
-    return Bukkit.createBlockData(Material.RED_GLAZED_TERRACOTTA);
+  public Material getBallMaterial() {
+    return Material.RED_DYE;
   }
 
   @Override

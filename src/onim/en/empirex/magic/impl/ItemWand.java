@@ -96,12 +96,13 @@ public class ItemWand implements Wand {
   }
 
   @Override
-  public void castSpell(Player player) {
+  public boolean castSpell(Player player) {
     Spell spell = getActiveSpell();
 
     if (spell != null) {
-      spell.activate(player);
+      return spell.activate(player);
     }
+    return false;
   }
 
   @Override

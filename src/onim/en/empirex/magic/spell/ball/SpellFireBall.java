@@ -1,10 +1,8 @@
 package onim.en.empirex.magic.spell.ball;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.LivingEntity;
 
 import onim.en.empirex.util.PackedParticle;
@@ -40,8 +38,8 @@ public class SpellFireBall extends SpellAbstractBall {
   }
 
   @Override
-  public BlockData getBlockData() {
-    return Bukkit.createBlockData(Material.MAGMA_BLOCK);
+  public Material getBallMaterial() {
+    return Material.MAGMA_CREAM;
   }
 
   @Override

@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import onim.en.empirex.EmpireX;
 import onim.en.empirex.item.CustomItem;
 import onim.en.empirex.item.interfaces.Droppable;
 import onim.en.empirex.item.interfaces.LeftClickable;
@@ -54,8 +55,12 @@ public abstract class AbstractWand extends CustomItem implements LeftClickable, 
       return;
     }
 
-    Wand wand = WandManager.getWand(event.getItem());
-    wand.castSpell(player);
+    EmpireX.civilianFactory.executeIfPresent(player, c -> {
+      Wand wand = WandManager.getWand(event.getItem());
+      if (wand.castSpell(player)) {
+        c.addForce(-wand.getActiveSpell().getCost());
+      }
+    });
   }
 
   public abstract double getCooldown();
