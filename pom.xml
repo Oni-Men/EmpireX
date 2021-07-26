@@ -41,13 +41,6 @@
 		</dependency>
 		<dependency>
 			<groupId>net.minecraft</groupId>
-			<artifactId>minecraft</artifactId>
-			<version>1.17.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/libs/mojang_1.17.1.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>net.minecraft</groupId>
 			<artifactId>patch</artifactId>
 			<version>1.17.1</version>
 			<scope>system</scope>
